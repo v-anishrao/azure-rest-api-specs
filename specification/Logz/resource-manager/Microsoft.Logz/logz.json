@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "LogzApi",
-    "version": "v1"
+    "version": "2019-02-01-preview"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/logz": {
