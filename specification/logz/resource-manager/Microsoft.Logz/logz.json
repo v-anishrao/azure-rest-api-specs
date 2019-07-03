@@ -1,375 +1,296 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
-    "title": "LogzApi",
-    "version": "2019-02-01-preview"
+    "title": "Logz Resource Provider",
+    "description": "Logz provider",
+    "version": "2019-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/logz": {
-      "get": {
-        "tags": [
-          "LogzResource"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzListResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzListResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzListResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/logz/{logzName}": {
       "get": {
-        "tags": [
-          "LogzResource"
-        ],
+        "description": "Returns logz resource for a given name.",
+        "operationId": "Logz_Get",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logzName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LogzNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              }
+            "description": "Logz details.",
+            "schema": {
+              "$ref": "#/definitions/LogzResource"
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "LogzResource"
-        ],
+        "description": "Create or update logz resource.",
+        "operationId": "Logz_CreateAndUpdate",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logzName",
-            "in": "path",
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LogzNameParameter"
+          },
+          {
+            "name": "LogzResource",
+            "description": "Logz details.",
+            "in": "body",
             "required": true,
             "schema": {
-              "type": "string",
-              "default": ""
+              "$ref": "#/definitions/LogzResource"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogzResource"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogzResource"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogzResource"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogzResource"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              }
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/LogzResource"
             }
           }
         }
       },
       "patch": {
-        "tags": [
-          "LogzResource"
-        ],
+        "description": "Logz logz details.",
+        "operationId": "Logz_Update",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logzName",
-            "in": "path",
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LogzNameParameter"
+          },
+          {
+            "name": "LogzPatchResource",
+            "description": "Logz patch details.",
+            "in": "body",
             "required": true,
             "schema": {
-              "type": "string",
-              "default": ""
+              "$ref": "#/definitions/LogzPatchResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogzResource"
-                }
-              }
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/LogzResource"
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "LogzResource"
-        ],
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Logz/logz": {
+      "get": {
+        "description": "Returns list of logz.",
+        "operationId": "Logz_List",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "logzName",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Logz details.",
+            "schema": {
+              "$ref": "#/definitions/LogzResourceList"
+            }
           }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "LogzResource": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "readOnly": true
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "location": {
+  "definitions": {
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
             "type": "string"
           }
         },
-        "additionalProperties": false
-      },
-      "LogzListResult": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LogzResource"
-            }
-          },
-          "nextLink": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
+        "x-ms-azure-resource": true
       }
+    },
+    "LogzResource": {
+      "type": "object",
+      "description": "Logz details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [ "properties" ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [ "accountKey" ],
+          "properties": {
+            "accountKey": {
+              "type": "string",
+              "description": "LogzIo Account key."
+            }
+          }
+        }
+      }
+    },
+    "LogzPatchResource": {
+      "type": "object",
+      "description": "Logz patch properties",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc..."
+            }
+          }
+        }
+      }
+    },
+    "LogzResourceList": {
+      "description": "The list of Logz.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of logz list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogzResource"
+          }
+        }
+      }
+    }
+
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "LogzNameParameter": {
+      "name": "logzName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name logz resource.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
