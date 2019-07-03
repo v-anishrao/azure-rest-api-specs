@@ -79,19 +79,12 @@
             }
           },
           {
-            "name": "clusterName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          {
             "name": "logzName",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             }
           }
         ],
@@ -142,19 +135,12 @@
             }
           },
           {
-            "name": "clusterName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          {
             "name": "logzName",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             }
           }
         ],
@@ -249,19 +235,12 @@
             }
           },
           {
-            "name": "clusterName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          {
             "name": "logzName",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             }
           }
         ],
@@ -332,19 +311,12 @@
             }
           },
           {
-            "name": "clusterName",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "default": ""
-            }
-          },
-          {
             "name": "logzName",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             }
           }
         ],
