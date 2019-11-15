@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2020-02-28-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "values": [
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.IndustryDataLifecycle/standardModels/model1",
+            "name": "model1",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "location": "eastus",
+            "type": "Microsoft.IndustryDataLifecycle/standardModels"
+          },
+          {
+            "id": "/subscriptions/subid/providers/Microsoft.IndustryDataLifecycle/standardModels/model2",
+            "name": "model2",
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "type": "Microsoft.IndustryDataLifecycle/standardModels"
+          }
+        ]
+      }
+    }
+  }
+}

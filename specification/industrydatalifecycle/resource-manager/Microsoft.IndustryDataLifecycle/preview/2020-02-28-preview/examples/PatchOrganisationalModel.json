@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "modelId": "model1",
+    "api-version": "2020-02-28-preview",
+    "requestBody": {
+      "location": "eastus",
+      "tags": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string",
+        "additionalProp4": "string"
+      },
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1",
+        "name": "model1",
+        "type": "Microsoft.IndustryDataLifecycle/organisationalModels",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string",
+          "additionalProp4": "string"
+        },
+        "location": "eastus",
+        "properties": {
+          "entities": [
+            {
+              "entityId": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1",
+              "entityName": "entity1",
+              "attribute": [
+                {
+                  "attributeId": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1/attributes/attribute1",
+                  "name": "attribute1",
+                  "description": "attribute1"
+                }
+              ]
+            },
+            {
+              "entityId": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity2",
+              "entityName": "entity2",
+              "attribute": [
+                {
+                  "attributeId": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1/attributes/attribute2",
+                  "name": "attribute2",
+                  "description": "attribute2"
+                }
+              ]
+            }
+          ],
+          "relationships": [
+            {
+              "fromEntity": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1",
+              "fromAttribute": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1/attributes/attribute1",
+              "toEntity": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity2",
+              "toAttribute": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.IndustryDataLifecycle/organisationalModels/model1/entities/entity1/attributes/attribute2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
