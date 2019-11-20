@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-02-28-preview",
-    "title": "industrydatalifecycle",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "industrydatalifecycleClient"
-    }
+    "title": "Microsoft.IndustryDataLifecycle",
+    "description": "Industry Data Lifecycle Resource provider."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -18,126 +15,60 @@
   "produces": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IndustryDataLifecycle/standardModels": {
-      "get": {
-        "tags": [
-          "StandardModels"
-        ],
-        "operationId": "StandardModelGet",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "Gets the list of all standard models.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "schema": {
-              "$ref": "#/definitions/ModelList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IndustryDataLifecycle/standardModels/{modelId}": {
-      "get": {
-        "tags": [
-          "StandardModels"
-        ],
-        "operationId": "StandardModelListGet",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ModelIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "schema": {
-              "$ref": "#/definitions/GetModelResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/organisationalModels": {
       "get": {
         "tags": [
           "OrganisationalModels"
         ],
-        "operationId": "OrganisationalModelsListGet",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "Gets the list of all standard models.",
+        "summary": "Gets the list of organisational models under the resource group.",
+        "operationId": "GetOrganisationalModels",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resouce group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The api version.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModelList"
+              "$ref": "#/definitions/GetPagedResponseContract[IndustryModelInfo]"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetOrganisationalModels": {
+            "$ref": "./Examples/GetOrganisationalModels.json"
           }
         }
       }
@@ -147,36 +78,61 @@
         "tags": [
           "OrganisationalModels"
         ],
-        "operationId": "OrganisationalModelGet",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "summary": "Gets an industry model.",
+        "operationId": "GetOrganisationalModel",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ModelIdParameter"
+            "name": "modelId",
+            "in": "path",
+            "description": "The model Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API Version",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/GetModelResponse"
+              "$ref": "#/definitions/GetResponseContract[IndustryModel]"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetOrganisationalModel": {
+            "$ref": "./Examples/GetOrganisationalModel.json"
           }
         }
       },
@@ -184,53 +140,75 @@
         "tags": [
           "OrganisationalModels"
         ],
-        "operationId": "OrganisationalModelPut",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "summary": "Creates an industry model.",
+        "operationId": "PutOrganisationalModel",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ModelIdParameter"
+            "name": "modelId",
+            "in": "path",
+            "description": "The model Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CreateModelRequestBody"
+            "name": "api-version",
+            "in": "query",
+            "description": "The api version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request for creation of a model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestBodyForPutContract[Object]"
+            }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Accepted",
+          "200": {
+            "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "provisioningState": {
-                  "type": "string",
-                  "enum": [
-                    "Creating"
-                  ]
-                },
-                "properties": {
-                  "$ref": "#/definitions/CreateModelRequest"
-                }
-              }
+              "$ref": "#/definitions/ResponseBodyForPutContract[Object]"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutOrganisationalModel": {
+            "$ref": "./Examples/PutOrganisationalModel.json"
           }
         }
       },
@@ -238,87 +216,205 @@
         "tags": [
           "OrganisationalModels"
         ],
-        "operationId": "OrganisationalModelPatch",
-        "x-ms-examples": {
-          "BatchAccountDelete": {
-            "$ref": "./examples/OperationGroupGet.json"
-          }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "summary": "Patches an industry model.",
+        "operationId": "PatchOrganisationalModel",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The resource group name.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ModelIdParameter"
+            "name": "modelId",
+            "in": "path",
+            "description": "The model Id.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/PatchModelRequestBody"
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request for creation of a model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestBodyForPutContract[Object]"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/GetModelResponse"
+              "$ref": "#/definitions/GetResponseContract[IndustryModel]"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "400": {
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PatchOrganisationalModel": {
+            "$ref": "./Examples/PatchOrganisationalModel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IndustryDataLifecycle/standardModels": {
+      "get": {
+        "tags": [
+          "StandardModels"
+        ],
+        "summary": "Gets the list standard model",
+        "operationId": "GetStandardModels",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API Version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetPagedResponseContract[IndustryModelInfo]"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStandardModels": {
+            "$ref": "./Examples/GetStandardModels.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IndustryDataLifecycle/standardModels/{modelId}": {
+      "get": {
+        "tags": [
+          "StandardModels"
+        ],
+        "summary": "Gets the standard model metadata.",
+        "description": "Gets the standard model from the Id Specified.",
+        "operationId": "GetStandardModel",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "The model Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API Version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetResponseContract[IndustryModel]"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetStandardModel": {
+            "$ref": "./Examples/GetStandardModel.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "IndustryModel": {
+    "GetPagedResponseContract[IndustryModelInfo]": {
       "type": "object",
-      "description": "The industry model.",
       "properties": {
-        "enitities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "entityId": {
-                "type": "string"
-              },
-              "entityName": {
-                "type": "string"
-              }
-            }
-          }
+        "nextLink": {
+          "type": "string"
         },
-        "relationships": {
+        "values": {
+          "uniqueItems": false,
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "fromEntityId": {
-                "type": "string"
-              },
-              "fromAttribute": {
-                "type": "string"
-              },
-              "toEntityId": {
-                "type": "string"
-              },
-              "toAttribute": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/IndustryModelInfo"
           }
         }
       }
     },
-    "Entity": {
-      "description": "An entity object",
+    "IndustryModelInfo": {
       "type": "object",
       "properties": {
         "id": {
@@ -327,59 +423,44 @@
         "name": {
           "type": "string"
         },
-        "attributes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Attribute"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         },
-        "description": {
+        "location": {
+          "type": "string"
+        },
+        "type": {
           "type": "string"
         }
       }
     },
-    "Attribute": {
-      "description": "An attribute of the entity",
+    "ErrorResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "datatype": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition"
         }
       }
     },
-    "EntityList": {
+    "ErrorDefinition": {
       "type": "object",
       "properties": {
-        "nextLink": {
+        "code": {
           "type": "string"
         },
-        "value": {
-          "$ref": "#/definitions/Entity"
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
         }
       }
     },
-    "ModelList": {
+    "GetResponseContract[IndustryModel]": {
       "type": "object",
-      "properties": {
-        "nextLink": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/GetModelResponse"
-        }
-      }
-    },
-    "GetModelResponse": {
-      "description": "The GET model response",
       "properties": {
         "id": {
           "type": "string"
@@ -391,253 +472,137 @@
           "type": "string"
         },
         "tags": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/IndustryModel"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "DirectiveConfiguration": {
+    "IndustryModel": {
       "type": "object",
       "properties": {
+        "modelName": {
+          "type": "string"
+        },
+        "modelId": {
+          "type": "string"
+        },
         "entities": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": [
-                "Include",
-                "Exclude"
-              ]
-            },
-            "list": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "entityReference": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "customize": {
+          "uniqueItems": false,
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "entityReference": {
-                "type": "string"
-              },
-              "entityName": {
-                "type": "string"
-              },
-              "attributeInclusionType": {
-                "type": "string",
-                "enum": [
-                  "Include",
-                  "Exclude"
-                ]
-              },
-              "attributes": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "reference": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "attributeGroups": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "reference": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "relationship": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "Denormalization",
-                      "Aggregation"
-                    ]
-                  },
-                  "pairs": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "source": {
-                          "type": "object",
-                          "properties": {
-                            "entityReference": {
-                              "type": "string"
-                            },
-                            "multiplicity": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "target": {
-                          "type": "object",
-                          "properties": {
-                            "entityReference": {
-                              "type": "string"
-                            },
-                            "multiplicity": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "joinPairs": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "sourceAttribute": {
-                                "type": "string"
-                              },
-                              "targetAttribute": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "relationships": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Relationship"
           }
         }
       }
     },
-    "Directive": {
+    "Entity": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
-        "version": {
-          "type": "string"
-        },
-        "configuration": {
-          "$ref": "#/definitions/DirectiveConfiguration"
+        "attributes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
         }
       }
     },
-    "CreateModelRequest": {
+    "Relationship": {
+      "type": "object",
+      "properties": {
+        "fromEntityId": {
+          "type": "string"
+        },
+        "toEntityId": {
+          "type": "string"
+        },
+        "fromAttributeId": {
+          "type": "string"
+        },
+        "toAttributeId": {
+          "type": "string"
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestBodyForPutContract[Object]": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string"
         },
         "tags": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
-          "$ref": "#/definitions/Directive"
+          "type": "object"
+        }
+      }
+    },
+    "ResponseBodyForPutContract[Object]": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RequestBodyForPutContract[Object]"
         }
       }
     }
   },
-  "parameters": {
-    "CreateModelRequestBody": {
-      "name": "requestBody",
-      "description": "Request body used to create the organisational model.",
-      "in": "body",
-      "schema": {
-        "$ref": "#/definitions/CreateModelRequest"
-      }
-    },
-    "PatchModelRequestBody": {
-      "name": "requestBody",
-      "description": "Request body used to patch the organisational model.",
-      "in": "body",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "tags": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    },
-    "ModelIdParameter": {
-      "name": "modelId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The model id which is unique under the given scope."
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "Implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 flow."
     }
   }
 }
